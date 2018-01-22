@@ -133,6 +133,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>.\release_gl\glquake.exe</OutputFile>
       <AdditionalDependencies>.\dxsdk\sdk\lib\dxguid.lib;comctl32.lib;winmm.lib;wsock32.lib;opengl32.lib;glu32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GL Debug|Win32'">
@@ -173,6 +174,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <OutputFile>.\debug_gl\glquake.exe</OutputFile>
       <AdditionalDependencies>.\dxsdk\sdk\lib\dxguid.lib;comctl32.lib;winmm.lib;wsock32.lib;opengl32.lib;glu32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -213,6 +215,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <OutputFile>.\Debug\WinQuake.exe</OutputFile>
       <AdditionalDependencies>.\dxsdk\sdk\lib\dxguid.lib;.\scitech\lib\win32\vc\mgllt.lib;winmm.lib;wsock32.lib;opengl32.lib;glu32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -252,6 +255,7 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>.\Release\WinQuake.exe</OutputFile>
       <AdditionalDependencies>.\dxsdk\sdk\lib\dxguid.lib;.\scitech\lib\win32\vc\mgllt.lib;winmm.lib;wsock32.lib;opengl32.lib;glu32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
