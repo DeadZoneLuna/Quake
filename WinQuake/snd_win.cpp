@@ -66,7 +66,7 @@ LPDIRECTSOUNDBUFFER pDSBuf, pDSPBuf;
 
 HINSTANCE hInstDS;
 
-qboolean SNDDMA_InitDirect (void);
+sndinitstat SNDDMA_InitDirect (void);
 qboolean SNDDMA_InitWav (void);
 
 
@@ -219,7 +219,7 @@ sndinitstat SNDDMA_InitDirect (void)
 			return SIS_FAILURE;
 		}
 
-		pDirectSoundCreate = (void *)GetProcAddress(hInstDS,"DirectSoundCreate");
+		pDirectSoundCreate = reinterpret_cast<decltype( pDirectSoundCreate )>( GetProcAddress(hInstDS,"DirectSoundCreate") );
 
 		if (!pDirectSoundCreate)
 		{
@@ -482,7 +482,7 @@ qboolean SNDDMA_InitWav (void)
 		FreeSound ();
 		return false; 
 	}
-	lpData = GlobalLock(hData);
+	lpData = reinterpret_cast<HPSTR>( GlobalLock(hData) );
 	if (!lpData)
 	{ 
 		Con_SafePrintf ("Sound: Failed to lock.\n");
@@ -570,7 +570,7 @@ int SNDDMA_Init(void)
 	{
 		if (snd_firsttime || snd_isdirect)
 		{
-			stat = SNDDMA_InitDirect ();;
+			stat = SNDDMA_InitDirect ();
 
 			if (stat == SIS_SUCCESS)
 			{
