@@ -403,7 +403,7 @@ void D_PolysetUpdateTables (void)
 		r_affinetridesc.pskin != skinstart)
 	{
 		skinwidth = r_affinetridesc.skinwidth;
-		skinstart = r_affinetridesc.pskin;
+		skinstart = reinterpret_cast<byte*>( r_affinetridesc.pskin );
 		s = skinstart;
 		for (i=0 ; i<MAX_LBM_HEIGHT ; i++, s+=skinwidth)
 			skintable[i] = s;
@@ -702,7 +702,7 @@ void D_PolysetFillSpans8 (spanpackage_t *pspanpackage)
 
 		if (lcount)
 		{
-			lpdest = pspanpackage->pdest;
+			lpdest = reinterpret_cast<byte*>( pspanpackage->pdest );
 
 			do
 			{

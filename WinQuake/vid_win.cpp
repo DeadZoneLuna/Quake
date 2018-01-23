@@ -287,7 +287,7 @@ qboolean VID_AllocBuffers (int width, int height)
 
 	VID_highhunkmark = Hunk_HighMark ();
 
-	d_pzbuffer = Hunk_HighAllocName (tbuffersize, "video");
+	d_pzbuffer = reinterpret_cast<short*>( Hunk_HighAllocName (tbuffersize, "video") );
 
 	vid_surfcache = (byte *)d_pzbuffer +
 			width * height * sizeof (*d_pzbuffer);
@@ -1348,7 +1348,7 @@ qboolean VID_SetWindowedMode (int modenum)
 
 	MGL_makeCurrentDC(dibdc);
 
-	vid.buffer = vid.conbuffer = vid.direct = dibdc->surface;
+	vid.buffer = vid.conbuffer = vid.direct = reinterpret_cast<pixel_t*>( dibdc->surface );
 	vid.rowbytes = vid.conrowbytes = dibdc->mi.bytesPerLine;
 	vid.numpages = 1;
 	vid.maxwarpwidth = WARP_WIDTH;
@@ -1506,7 +1506,7 @@ qboolean VID_SetFullDIBMode (int modenum)
 
 	MGL_makeCurrentDC(dibdc);
 
-	vid.buffer = vid.conbuffer = vid.direct = dibdc->surface;
+	vid.buffer = vid.conbuffer = vid.direct = reinterpret_cast<pixel_t*>( dibdc->surface );
 	vid.rowbytes = vid.conrowbytes = dibdc->mi.bytesPerLine;
 	vid.numpages = 1;
 	vid.maxwarpwidth = WARP_WIDTH;
@@ -1730,20 +1730,20 @@ void VID_LockBuffer (void)
 	if (memdc)
 	{
 		// Update surface pointer for linear access modes
-		vid.buffer = vid.conbuffer = vid.direct = memdc->surface;
+		vid.buffer = vid.conbuffer = vid.direct = reinterpret_cast<pixel_t*>( memdc->surface );
 		vid.rowbytes = vid.conrowbytes = memdc->mi.bytesPerLine;
 	}
 	else if (mgldc)
 	{
 		// Update surface pointer for linear access modes
-		vid.buffer = vid.conbuffer = vid.direct = mgldc->surface;
+		vid.buffer = vid.conbuffer = vid.direct = reinterpret_cast<pixel_t*>( mgldc->surface );
 		vid.rowbytes = vid.conrowbytes = mgldc->mi.bytesPerLine;
 	}
 
 	if (r_dowarp)
 		d_viewbuffer = r_warpbuffer;
 	else
-		d_viewbuffer = (void *)(byte *)vid.buffer;
+		d_viewbuffer = vid.buffer;
 
 	if (r_dowarp)
 		screenwidth = WARP_WIDTH;
