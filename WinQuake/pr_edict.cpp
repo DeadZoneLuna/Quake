@@ -283,7 +283,7 @@ char *PR_ValueString (etype_t type, eval_t *val)
 	ddef_t		*def;
 	dfunction_t	*f;
 	
-	type &= ~DEF_SAVEGLOBAL;
+	*reinterpret_cast<unsigned short*>( &type ) &= ~DEF_SAVEGLOBAL;
 
 	switch (type)
 	{
@@ -335,7 +335,7 @@ char *PR_UglyValueString (etype_t type, eval_t *val)
 	ddef_t		*def;
 	dfunction_t	*f;
 	
-	type &= ~DEF_SAVEGLOBAL;
+	*reinterpret_cast<unsigned short*>( &type ) &= ~DEF_SAVEGLOBAL;
 
 	switch (type)
 	{
@@ -383,10 +383,10 @@ char *PR_GlobalString (int ofs)
 	char	*s;
 	int		i;
 	ddef_t	*def;
-	void	*val;
+	eval_t	*val;
 	static char	line[128];
 	
-	val = (void *)&pr_globals[ofs];
+	val = (eval_t *)&pr_globals[ofs];
 	def = ED_GlobalAtOfs(ofs);
 	if (!def)
 		sprintf (line,"%i(???)", ofs);
@@ -618,7 +618,7 @@ void ED_WriteGlobals (FILE *f)
 	ddef_t		*def;
 	int			i;
 	char		*name;
-	int			type;
+	etype_t		type;
 
 	fprintf (f,"{\n");
 	for (i=0 ; i<progs->numglobaldefs ; i++)
@@ -627,7 +627,7 @@ void ED_WriteGlobals (FILE *f)
 		type = def->type;
 		if ( !(def->type & DEF_SAVEGLOBAL) )
 			continue;
-		type &= ~DEF_SAVEGLOBAL;
+		*reinterpret_cast<unsigned short*>( &type ) &= ~DEF_SAVEGLOBAL;
 
 		if (type != ev_string
 		&& type != ev_float
@@ -1041,14 +1041,14 @@ void PR_LoadProgs (void)
 
 	for (i=0 ; i<progs->numglobaldefs ; i++)
 	{
-		pr_globaldefs[i].type = LittleShort (pr_globaldefs[i].type);
+		pr_globaldefs[i].type = static_cast<etype_t>( LittleShort (pr_globaldefs[i].type) );
 		pr_globaldefs[i].ofs = LittleShort (pr_globaldefs[i].ofs);
 		pr_globaldefs[i].s_name = LittleLong (pr_globaldefs[i].s_name);
 	}
 
 	for (i=0 ; i<progs->numfielddefs ; i++)
 	{
-		pr_fielddefs[i].type = LittleShort (pr_fielddefs[i].type);
+		pr_fielddefs[i].type = static_cast<etype_t>( LittleShort (pr_fielddefs[i].type) );
 		if (pr_fielddefs[i].type & DEF_SAVEGLOBAL)
 			Sys_Error ("PR_LoadProgs: pr_fielddefs[i].type & DEF_SAVEGLOBAL");
 		pr_fielddefs[i].ofs = LittleShort (pr_fielddefs[i].ofs);
