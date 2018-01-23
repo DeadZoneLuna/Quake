@@ -272,13 +272,18 @@ if( RENDERER_IS_OPENGL )
 endif()
 
 if( MSVC )
+	#Software mode tries to link with this, but it doesn't appear to exist for new versions of MSVC
+	if( RENDERER_IS_SOFTWARE )
+		set( IGNORE_LIBC "/NODEFAULTLIB:LIBC.lib" )
+	endif()
+
 	set_target_properties( winquake PROPERTIES
 		# Disable warning 4805: '==': unsafe mix of type 'qboolean' and type 'bool' in operation
 		# TODO: once all code has upgraded away from qboolean, remove this
 		COMPILE_FLAGS "/W1 /wd4805"
 		# Uses WinMain entry point
 		# /SAFESEH:NO is needed because of assembly files. Can be removed once those are gone
-		LINK_FLAGS "/SUBSYSTEM:WINDOWS /SAFESEH:NO"
+		LINK_FLAGS "/SUBSYSTEM:WINDOWS /SAFESEH:NO ${IGNORE_LIBC}"
 	)
 endif()
 
