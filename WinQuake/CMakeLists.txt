@@ -328,3 +328,16 @@ if( RENDERER_IS_SOFTWARE )
 	configure_asm_file( surf8 )
 	configure_asm_file( surf16 )
 endif()
+
+set_target_properties( winquake PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}
+)
+
+foreach( config IN LISTS CMAKE_CONFIGURATION_TYPES )
+	# The property names are all caps
+	string( TOUPPER ${config} config )
+	
+	set_target_properties( winquake PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY_${config} ${CMAKE_INSTALL_PREFIX}
+	)
+endforeach()
