@@ -273,8 +273,10 @@ endif()
 
 if( MSVC )
 	set_target_properties( winquake PROPERTIES
-		COMPILE_FLAGS "/W1"
-		#Uses WinMain entry point
+		# Disable warning 4805: '==': unsafe mix of type 'qboolean' and type 'bool' in operation
+		# TODO: once all code has upgraded away from qboolean, remove this
+		COMPILE_FLAGS "/W1 /wd4805"
+		# Uses WinMain entry point
 		# /SAFESEH:NO is needed because of assembly files. Can be removed once those are gone
 		LINK_FLAGS "/SUBSYSTEM:WINDOWS /SAFESEH:NO"
 	)
