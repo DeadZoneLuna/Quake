@@ -558,8 +558,10 @@ char *Sys_ConsoleInput (void)
 	static int		len;
 	INPUT_RECORD	recs[1024];
 	int		count;
-	int		i, dummy;
-	int		ch, numread, numevents;
+	int		i;
+	int		ch;
+	DWORD dummy;
+	DWORD numread, numevents;
 
 	if (!isDedicated)
 		return NULL;
