@@ -125,6 +125,7 @@ int WINS_Init (void)
 
 // initialize the Winsock function vectors (we do this instead of statically linking
 // so we can run on Win 3.1, where there isn't necessarily Winsock)
+	//TODO: we can just link statically now - Solokiller
     hInst = LoadLibrary("wsock32.dll");
 	
 	if (hInst == NULL)
@@ -136,19 +137,19 @@ int WINS_Init (void)
 
 	winsock_lib_initialized = true;
 
-    pWSAStartup = (void *)GetProcAddress(hInst, "WSAStartup");
-    pWSACleanup = (void *)GetProcAddress(hInst, "WSACleanup");
-    pWSAGetLastError = (void *)GetProcAddress(hInst, "WSAGetLastError");
-    psocket = (void *)GetProcAddress(hInst, "socket");
-    pioctlsocket = (void *)GetProcAddress(hInst, "ioctlsocket");
-    psetsockopt = (void *)GetProcAddress(hInst, "setsockopt");
-    precvfrom = (void *)GetProcAddress(hInst, "recvfrom");
-    psendto = (void *)GetProcAddress(hInst, "sendto");
-    pclosesocket = (void *)GetProcAddress(hInst, "closesocket");
-    pgethostname = (void *)GetProcAddress(hInst, "gethostname");
-    pgethostbyname = (void *)GetProcAddress(hInst, "gethostbyname");
-    pgethostbyaddr = (void *)GetProcAddress(hInst, "gethostbyaddr");
-    pgetsockname = (void *)GetProcAddress(hInst, "getsockname");
+    pWSAStartup = reinterpret_cast<decltype( pWSAStartup )>( GetProcAddress(hInst, "WSAStartup") );
+    pWSACleanup = reinterpret_cast<decltype( pWSACleanup )>( GetProcAddress(hInst, "WSACleanup") );
+    pWSAGetLastError = reinterpret_cast<decltype( pWSAGetLastError )>( GetProcAddress(hInst, "WSAGetLastError") );
+    psocket = reinterpret_cast<decltype( psocket )>( GetProcAddress(hInst, "socket") );
+    pioctlsocket = reinterpret_cast<decltype( pioctlsocket )>( GetProcAddress(hInst, "ioctlsocket") );
+    psetsockopt = reinterpret_cast<decltype( psetsockopt )>( GetProcAddress(hInst, "setsockopt") );
+    precvfrom = reinterpret_cast<decltype( precvfrom )>( GetProcAddress(hInst, "recvfrom") );
+    psendto = reinterpret_cast<decltype( psendto )>( GetProcAddress(hInst, "sendto") );
+    pclosesocket = reinterpret_cast<decltype( pclosesocket )>( GetProcAddress(hInst, "closesocket") );
+    pgethostname = reinterpret_cast<decltype( pgethostname )>( GetProcAddress(hInst, "gethostname") );
+    pgethostbyname = reinterpret_cast<decltype( pgethostbyname )>( GetProcAddress(hInst, "gethostbyname") );
+    pgethostbyaddr = reinterpret_cast<decltype( pgethostbyaddr )>( GetProcAddress(hInst, "gethostbyaddr") );
+    pgetsockname = reinterpret_cast<decltype( pgetsockname )>( GetProcAddress(hInst, "getsockname") );
 
     if (!pWSAStartup || !pWSACleanup || !pWSAGetLastError ||
 		!psocket || !pioctlsocket || !psetsockopt ||
