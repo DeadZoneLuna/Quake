@@ -294,7 +294,7 @@ int WINS_OpenSocket (int port)
 	address.sin_family = AF_INET;
 	address.sin_addr.s_addr = myAddr;
 	address.sin_port = htons((unsigned short)port);
-	if( bind (newsocket, (void *)&address, sizeof(address)) == 0)
+	if( bind (newsocket, reinterpret_cast<sockaddr*>( &address ), sizeof(address)) == 0)
 		return newsocket;
 
 	Sys_Error ("Unable to bind to %s", WINS_AddrToString((struct qsockaddr *)&address));
@@ -400,7 +400,7 @@ int WINS_Read (int socket, byte *buf, int len, struct qsockaddr *addr)
 	int addrlen = sizeof (struct qsockaddr);
 	int ret;
 
-	ret = precvfrom (socket, buf, len, 0, (struct sockaddr *)addr, &addrlen);
+	ret = precvfrom (socket, reinterpret_cast<char*>( buf ), len, 0, (struct sockaddr *)addr, &addrlen);
 	if (ret == -1)
 	{
 		int ierrno = pWSAGetLastError();
@@ -454,7 +454,7 @@ int WINS_Write (int socket, byte *buf, int len, struct qsockaddr *addr)
 {
 	int ret;
 
-	ret = psendto (socket, buf, len, 0, (struct sockaddr *)addr, sizeof(struct qsockaddr));
+	ret = psendto (socket, reinterpret_cast<char*>( buf ), len, 0, (struct sockaddr *)addr, sizeof(struct qsockaddr));
 	if (ret == -1)
 		if (pWSAGetLastError() == WSAEWOULDBLOCK)
 			return 0;
