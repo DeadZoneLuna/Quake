@@ -108,7 +108,7 @@ typedef struct
 
 extern cvar_t	r_drawflat;
 extern int		d_spanpixcount;
-extern int		r_framecount;		// sequence # of current frame since Quake
+extern "C"	int		r_framecount;		// sequence # of current frame since Quake
 									//  started
 extern qboolean	r_drawpolys;		// 1 if driver wants clipped polygons
 									//  rather than a span list
@@ -129,7 +129,7 @@ extern float	r_aliasuvscale;		// scale-up factor for screen u and v
 extern int		r_pixbytes;
 extern qboolean	r_dowarp;
 
-extern affinetridesc_t	r_affinetridesc;
+extern "C"	affinetridesc_t	r_affinetridesc;
 extern spritedesc_t		r_spritedesc;
 extern zpointdesc_t		r_zpointdesc;
 extern polydesc_t		r_polydesc;
@@ -139,16 +139,16 @@ extern int		d_con_indirect;	// if 0, Quake will draw console directly
 								//  draw console via D_DrawRect. Must be
 								//  defined by driver
 
-extern vec3_t	r_pright, r_pup, r_ppn;
+extern "C" vec3_t	r_pright, r_pup, r_ppn;
 
 
-void D_Aff8Patch (void *pcolormap);
+extern "C" void D_Aff8Patch (void *pcolormap);
 void D_BeginDirectRect (int x, int y, byte *pbitmap, int width, int height);
 void D_DisableBackBufferAccess (void);
 void D_EndDirectRect (int x, int y, int width, int height);
-void D_PolysetDraw (void);
-void D_PolysetDrawFinalVerts (finalvert_t *fv, int numverts);
-void D_DrawParticle (particle_t *pparticle);
+extern "C" void D_PolysetDraw (void);
+extern "C" void D_PolysetDrawFinalVerts (finalvert_t *fv, int numverts);
+extern "C" void D_DrawParticle (particle_t *pparticle);
 void D_DrawPoly (void);
 void D_DrawSprite (void);
 void D_DrawSurfaces (void);
@@ -182,7 +182,7 @@ extern byte				*r_skysource;
 // !!! must be kept the same as in quakeasm.h !!!
 #define TRANSPARENT_COLOR	0xFF
 
-extern void *acolormap;	// FIXME: should go away
+extern "C"	void *acolormap;	// FIXME: should go away
 
 //=======================================================================//
 

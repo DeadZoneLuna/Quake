@@ -70,11 +70,11 @@ extern fixed16_t	sadjust, tadjust;
 extern fixed16_t	bbextents, bbextentt;
 
 
-void D_DrawSpans8 (espan_t *pspans);
-void D_DrawSpans16 (espan_t *pspans);
-void D_DrawZSpans (espan_t *pspans);
+extern "C" void D_DrawSpans8 (espan_t *pspans);
+extern "C" void D_DrawSpans16 (espan_t *pspans);
+extern "C" void D_DrawZSpans (espan_t *pspans);
 void Turbulent8 (espan_t *pspan);
-void D_SpriteDrawSpans (sspan_t *pspan);
+extern "C" void D_SpriteDrawSpans (sspan_t *pspan);
 
 void D_DrawSkyScans8 (espan_t *pspan);
 void D_DrawSkyScans16 (espan_t *pspan);
@@ -85,23 +85,23 @@ surfcache_t	*D_CacheSurface (msurface_t *surface, int miplevel);
 extern int D_MipLevelForScale (float scale);
 
 #if id386
-extern void D_PolysetAff8Start (void);
-extern void D_PolysetAff8End (void);
+extern "C" void D_PolysetAff8Start (void);
+extern "C" void D_PolysetAff8End (void);
 #endif
 
 extern short *d_pzbuffer;
 extern unsigned int d_zrowbytes, d_zwidth;
 
 extern int	*d_pscantable;
-extern int	d_scantable[MAXHEIGHT];
+extern "C" int	d_scantable[MAXHEIGHT];
 
-extern int	d_vrectx, d_vrecty, d_vrectright_particle, d_vrectbottom_particle;
+extern "C"	int	d_vrectx, d_vrecty, d_vrectright_particle, d_vrectbottom_particle;
 
-extern int	d_y_aspect_shift, d_pix_min, d_pix_max, d_pix_shift;
+extern "C"	int	d_y_aspect_shift, d_pix_min, d_pix_max, d_pix_shift;
 
 extern pixel_t	*d_viewbuffer;
 
-extern short	*zspantable[MAXHEIGHT];
+extern "C"	short	*zspantable[MAXHEIGHT];
 
 extern int		d_minmip;
 extern float	d_scalemip[3];

@@ -46,13 +46,19 @@ surf_t	*surfaces, *surface_p, *surf_max;
 edge_t	*newedges[MAXHEIGHT];
 edge_t	*removeedges[MAXHEIGHT];
 
+extern "C"
+{
 espan_t	*span_p, *max_span_p;
+}
 
 int		r_currentkey;
 
+extern "C"
+{
 int	current_iv;
 
 int	edge_head_u_shift20, edge_tail_u_shift20;
+}
 
 static void (*pdrawfunc)(void);
 
@@ -61,9 +67,12 @@ edge_t	edge_tail;
 edge_t	edge_aftertail;
 edge_t	edge_sentinel;
 
+extern "C"
+{
 float	fv;
+}
 
-void R_GenerateSpans (void);
+extern "C" void R_GenerateSpans (void);
 void R_GenerateSpansBackward (void);
 
 void R_LeadingEdge (edge_t *edge);

@@ -104,7 +104,7 @@ void R_RenderWorld (void);
 
 extern	mplane_t	screenedge[4];
 
-extern	vec3_t	r_origin;
+extern "C"	vec3_t	r_origin;
 
 extern	vec3_t	r_entorigin;
 
@@ -126,7 +126,7 @@ void R_DrawPolyList (void);
 // current entity info
 //
 extern	qboolean		insubmodel;
-extern	vec3_t			r_worldmodelorg;
+extern	"C"	vec3_t			r_worldmodelorg;
 
 
 void R_DrawSprite (void);
@@ -136,23 +136,23 @@ void R_RenderBmodelFace (bedge_t *pedges, msurface_t *psurf);
 void R_TransformPlane (mplane_t *p, float *normal, float *dist);
 void R_TransformFrustum (void);
 void R_SetSkyFrame (void);
-void R_DrawSurfaceBlock16 (void);
+extern "C" void R_DrawSurfaceBlock16 (void);
 void R_DrawSurfaceBlock8 (void);
 texture_t *R_TextureAnimation (texture_t *base);
 
 #if	id386
 
-void R_DrawSurfaceBlock8_mip0 (void);
-void R_DrawSurfaceBlock8_mip1 (void);
-void R_DrawSurfaceBlock8_mip2 (void);
-void R_DrawSurfaceBlock8_mip3 (void);
+extern "C" void R_DrawSurfaceBlock8_mip0 (void);
+extern "C" void R_DrawSurfaceBlock8_mip1 (void);
+extern "C" void R_DrawSurfaceBlock8_mip2 (void);
+extern "C" void R_DrawSurfaceBlock8_mip3 (void);
 
 #endif
 
 void R_GenSkyTile (void *pdest);
 void R_GenSkyTile16 (void *pdest);
-void R_Surf8Patch (void);
-void R_Surf16Patch (void);
+extern "C" void R_Surf8Patch (void);
+extern "C" void R_Surf16Patch (void);
 void R_DrawSubmodelPolygons (model_t *pmodel, int clipflags);
 void R_DrawSolidClippedSubmodelPolygons (model_t *pmodel);
 
@@ -162,16 +162,16 @@ void R_AliasDrawModel (alight_t *plighting);
 void R_BeginEdgeFrame (void);
 void R_ScanEdges (void);
 void D_DrawSurfaces (void);
-void R_InsertNewEdges (edge_t *edgestoadd, edge_t *edgelist);
-void R_StepActiveU (edge_t *pedge);
-void R_RemoveEdges (edge_t *pedge);
+extern "C" void R_InsertNewEdges (edge_t *edgestoadd, edge_t *edgelist);
+extern "C" void R_StepActiveU (edge_t *pedge);
+extern "C" void R_RemoveEdges (edge_t *pedge);
 
-extern void R_Surf8Start (void);
-extern void R_Surf8End (void);
-extern void R_Surf16Start (void);
-extern void R_Surf16End (void);
-extern void R_EdgeCodeStart (void);
-extern void R_EdgeCodeEnd (void);
+extern "C" void R_Surf8Start (void);
+extern "C" void R_Surf8End (void);
+extern "C" void R_Surf16Start (void);
+extern "C" void R_Surf16End (void);
+extern "C" void R_EdgeCodeStart (void);
+extern "C" void R_EdgeCodeEnd (void);
 
 extern void R_RotateBmodel (void);
 
@@ -186,7 +186,7 @@ extern int		*pfrustum_indexes[4];
 // !!! if this is changed, it must be changed in asm_draw.h too !!!
 #define	NEAR_CLIP	0.01
 
-extern int			ubasestep, errorterm, erroradjustup, erroradjustdown;
+extern "C"	int			ubasestep, errorterm, erroradjustup, erroradjustdown;
 extern int			vstartscan;
 
 extern fixed16_t	sadjust, tadjust;
@@ -251,26 +251,26 @@ void R_DrawParticles (void);
 void R_InitParticles (void);
 void R_ClearParticles (void);
 void R_ReadPointFile_f (void);
-void R_SurfacePatch (void);
+extern "C" void R_SurfacePatch (void);
 
 extern int		r_amodels_drawn;
 extern edge_t	*auxedges;
 extern int		r_numallocatededges;
-extern edge_t	*r_edges, *edge_p, *edge_max;
+extern "C"	edge_t	*r_edges, *edge_p, *edge_max;
 
-extern	edge_t	*newedges[MAXHEIGHT];
-extern	edge_t	*removeedges[MAXHEIGHT];
+extern	"C"	edge_t	*newedges[MAXHEIGHT];
+extern	"C"	edge_t	*removeedges[MAXHEIGHT];
 
-extern	int	screenwidth;
+extern	"C"	int	screenwidth;
 
 // FIXME: make stack vars when debugging done
-extern	edge_t	edge_head;
-extern	edge_t	edge_tail;
-extern	edge_t	edge_aftertail;
-extern int		r_bmodelactive;
+extern	"C"	edge_t	edge_head;
+extern	"C"	edge_t	edge_tail;
+extern	"C"	edge_t	edge_aftertail;
+extern	"C"	int		r_bmodelactive;
 extern vrect_t	*pconupdate;
 
-extern float		aliasxscale, aliasyscale, aliasxcenter, aliasycenter;
+extern "C"	float		aliasxscale, aliasyscale, aliasxcenter, aliasycenter;
 extern float		r_aliastransition, r_resfudge;
 
 extern int		r_outofsurfaces;
@@ -309,7 +309,7 @@ int R_LightPoint (vec3_t p);
 void R_SetupFrame (void);
 void R_cshift_f (void);
 void R_EmitEdge (mvertex_t *pv0, mvertex_t *pv1);
-void R_ClipEdge (mvertex_t *pv0, mvertex_t *pv1, clipplane_t *clip);
+extern "C" void R_ClipEdge (mvertex_t *pv0, mvertex_t *pv1, clipplane_t *clip);
 void R_SplitEntityOnNode2 (mnode_t *node);
 void R_MarkLights (dlight_t *light, int bit, mnode_t *node);
 
