@@ -355,7 +355,7 @@ qboolean IN_InitDInput (void)
 
 	if (!pDirectInputCreate)
 	{
-		pDirectInputCreate = (void *)GetProcAddress(hInstDI,"DirectInputCreateA");
+		pDirectInputCreate = reinterpret_cast<decltype( pDirectInputCreate )>( GetProcAddress(hInstDI,"DirectInputCreateA") );
 
 		if (!pDirectInputCreate)
 		{
