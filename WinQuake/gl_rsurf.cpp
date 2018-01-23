@@ -1528,14 +1528,14 @@ void BuildSurfaceDisplayList (msurface_t *fa)
 		for (i = 0 ; i < lnumverts ; ++i)
 		{
 			vec3_t v1, v2;
-			float *prev, *this, *next;
+			float *prev, *current, *next;
 			float f;
 
 			prev = poly->verts[(i + lnumverts - 1) % lnumverts];
-			this = poly->verts[i];
+			current = poly->verts[i];
 			next = poly->verts[(i + 1) % lnumverts];
 
-			VectorSubtract( this, prev, v1 );
+			VectorSubtract( current, prev, v1 );
 			VectorNormalize( v1 );
 			VectorSubtract( next, prev, v2 );
 			VectorNormalize( v2 );
