@@ -33,110 +33,110 @@ set( PREP_SRCS
 	anorms.h
 	bspfile.h
 	cdaudio.h
-	chase.c
-	cl_demo.c
-	cl_input.c
-	cl_main.c
-	cl_parse.c
-	cl_tent.c
+	chase.cpp
+	cl_demo.cpp
+	cl_input.cpp
+	cl_main.cpp
+	cl_parse.cpp
+	cl_tent.cpp
 	client.h
-	cmd.c
+	cmd.cpp
 	cmd.h
-	common.c
+	common.cpp
 	common.h
-	conproc.c
+	conproc.cpp
 	conproc.h
-	console.c
+	console.cpp
 	console.h
-	crc.c
+	crc.cpp
 	crc.h
-	cvar.c
+	cvar.cpp
 	cvar.h
 	dosisms.h
 	draw.h
-	host.c
-	host_cmd.c
-	in_win.c
+	host.cpp
+	host_cmd.cpp
+	in_win.cpp
 	input.h
-	keys.c
+	keys.cpp
 	keys.h
 	math.s
-	mathlib.c
+	mathlib.cpp
 	mathlib.h
-	menu.c
+	menu.cpp
 	menu.h
 	model.h
 	modelgen.h
 	net.h
-	net_dgrm.c
+	net_dgrm.cpp
 	net_dgrm.h
-	net_loop.c
+	net_loop.cpp
 	net_loop.h
-	net_main.c
+	net_main.cpp
 	net_ser.h
-	net_vcr.c
+	net_vcr.cpp
 	net_vcr.h
-	net_win.c
-	net_wins.c
+	net_win.cpp
+	net_wins.cpp
 	net_wins.h
-	net_wipx.c
+	net_wipx.cpp
 	net_wipx.h
-	pr_cmds.c
+	pr_cmds.cpp
 	pr_comp.h
-	pr_edict.c
-	pr_exec.c
+	pr_edict.cpp
+	pr_exec.cpp
 	progdefs.h
 	progs.h
 	protocol.h
 	quakeasm.h
 	quakedef.h
-	r_part.c
+	r_part.cpp
 	render.h
-	sbar.c
+	sbar.cpp
 	sbar.h
 	screen.h
 	server.h
-	snd_dma.c
-	snd_mem.c
-	snd_mix.c
+	snd_dma.cpp
+	snd_mem.cpp
+	snd_mix.cpp
 	snd_mixa.s
 	sound.h
 	spritegn.h
-	sv_main.c
-	sv_move.c
-	sv_phys.c
-	sv_user.c
+	sv_main.cpp
+	sv_move.cpp
+	sv_phys.cpp
+	sv_user.cpp
 	sys.h
 	vid.h
-	view.c
+	view.cpp
 	view.h
-	wad.c
+	wad.cpp
 	wad.h
 	winquake.h
-	world.c
+	world.cpp
 	world.h
 	worlda.s
-	zone.c
+	zone.cpp
 	zone.h
 )
 
 if( MSVC )
 	set( PREP_SRCS
 		${PREP_SRCS}
-		cd_win.c
-		sys_win.c
+		cd_win.cpp
+		snd_win.cpp
+		sys_win.cpp
 		sys_wina.s
-		snd_win.c
 	)
 endif()
 
 if( UNIX )
 	set( PREP_SRCS
 		${PREP_SRCS}
-		cd_linux.c
+		cd_linux.cpp
+		snd_linux.cpp
 		sys_dosa.s
-		sys_linux.c
-		snd_linux.c
+		sys_linux.cpp
 	)
 endif()
 
@@ -145,67 +145,67 @@ if( RENDERER_IS_SOFTWARE )
 		${PREP_SRCS}
 		d_draw.s
 		d_draw16.s
-		d_edge.c
-		d_fill.c
+		d_edge.cpp
+		d_fill.cpp
 		d_iface.h
-		d_init.c
-		d_modech.c
-		d_part.c
+		d_init.cpp
+		d_modech.cpp
+		d_part.cpp
 		d_parta.s
 		d_polysa.s
-		d_polyse.c
-		d_scan.c
+		d_polyse.cpp
+		d_scan.cpp
 		d_scana.s
-		d_sky.c
+		d_sky.cpp
 		d_spr8.s
-		d_sprite.c
-		d_surf.c
-		d_vars.c
+		d_sprite.cpp
+		d_surf.cpp
+		d_vars.cpp
 		d_varsa.s
-		d_zpoint.c
-		draw.c
-		model.c
-		r_aclip.c
+		d_zpoint.cpp
+		draw.cpp
+		model.cpp
+		r_aclip.cpp
 		r_aclipa.s
-		r_alias.c
+		r_alias.cpp
 		r_aliasa.s
-		r_bsp.c
-		r_draw.c
+		r_bsp.cpp
+		r_draw.cpp
 		r_drawa.s
-		r_edge.c
+		r_edge.cpp
 		r_edgea.s
-		r_efrag.c
-		r_light.c
+		r_efrag.cpp
+		r_light.cpp
 		r_local.h
-		r_main.c
-		r_misc.c
+		r_main.cpp
+		r_misc.cpp
 		r_shared.h
-		r_sky.c
-		r_sprite.c
-		r_surf.c
-		r_vars.c
+		r_sky.cpp
+		r_sprite.cpp
+		r_surf.cpp
+		r_vars.cpp
 		r_varsa.s
-		screen.c
+		screen.cpp
 		surf8.s
 		surf16.s
-		vid_win.c
+		vid_win.cpp
 	)
 elseif( RENDERER_IS_OPENGL )
 	set( PREP_SRCS
 		${PREP_SRCS}
-		gl_draw.c
-		gl_mesh.c
-		gl_model.c
+		gl_draw.cpp
+		gl_mesh.cpp
+		gl_model.cpp
 		gl_model.h
-		gl_refrag.c
-		gl_rlight.c
-		gl_rmain.c
-		gl_rmisc.c
-		gl_rsurf.c
-		gl_screen.c
-		gl_test.c
-		gl_vidnt.c
-		gl_warp.c
+		gl_refrag.cpp
+		gl_rlight.cpp
+		gl_rmain.cpp
+		gl_rmisc.cpp
+		gl_rsurf.cpp
+		gl_screen.cpp
+		gl_test.cpp
+		gl_vidnt.cpp
+		gl_warp.cpp
 		gl_warp_sin.h
 		glquake.h
 	)
