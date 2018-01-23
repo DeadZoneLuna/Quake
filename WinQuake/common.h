@@ -27,7 +27,13 @@ typedef unsigned char 		byte;
 #undef true
 #undef false
 
+//TODO: remove once conversion is complete - Solokiller
+#ifdef __cplusplus
+//Must be 4 bytes large - Solokiller
+using qboolean = int;
+#else
 typedef enum {false, true}	qboolean;
+#endif
 
 //============================================================================
 
