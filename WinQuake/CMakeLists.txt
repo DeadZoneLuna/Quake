@@ -241,6 +241,7 @@ endif()
 
 target_compile_definitions( winquake PRIVATE
 	$<$<CXX_COMPILER_ID:MSVC>:$<$<CONFIG:Debug>:_DEBUG>>
+	$<$<CXX_COMPILER_ID:MSVC>:CINTERFACE> #DirectX interfaces need this (for now)
 )
 
 if( RENDERER_IS_OPENGL )
