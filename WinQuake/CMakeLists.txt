@@ -32,7 +32,6 @@ set( PREP_SRCS
 	anorm_dots.h
 	anorms.h
 	bspfile.h
-	cd_win.c
 	cdaudio.h
 	chase.c
 	cl_demo.c
@@ -89,6 +88,7 @@ set( PREP_SRCS
 	progdefs.h
 	progs.h
 	protocol.h
+	quakeasm.h
 	quakedef.h
 	r_part.c
 	render.h
@@ -100,7 +100,6 @@ set( PREP_SRCS
 	snd_mem.c
 	snd_mix.c
 	snd_mixa.s
-	snd_win.c
 	sound.h
 	spritegn.h
 	sv_main.c
@@ -108,8 +107,6 @@ set( PREP_SRCS
 	sv_phys.c
 	sv_user.c
 	sys.h
-	sys_win.c
-	sys_wina.s
 	vid.h
 	view.c
 	view.h
@@ -122,6 +119,26 @@ set( PREP_SRCS
 	zone.c
 	zone.h
 )
+
+if( MSVC )
+	set( PREP_SRCS
+		${PREP_SRCS}
+		cd_win.c
+		sys_win.c
+		sys_wina.s
+		snd_win.c
+	)
+endif()
+
+if( UNIX )
+	set( PREP_SRCS
+		${PREP_SRCS}
+		cd_linux.c
+		sys_dosa.s
+		sys_linux.c
+		snd_linux.c
+	)
+endif()
 
 if( RENDERER_IS_SOFTWARE )
 	set( PREP_SRCS
@@ -287,6 +304,10 @@ configure_asm_file( math )
 configure_asm_file( snd_mixa )
 configure_asm_file( sys_wina )
 configure_asm_file( worlda )
+
+if( UNIX )
+	configure_asm_file( sys_dosa )
+endif()
 
 # Software renderer specific assembly files
 if( RENDERER_IS_SOFTWARE )
