@@ -145,6 +145,13 @@ elseif( RENDERER_IS_OPENGL )
 	)
 endif()
 
+if( MSVC )
+	set( PREP_SRCS
+		${PREP_SRCS}
+		winquake.rc
+	)
+endif()
+
 add_executable( winquake ${PREP_SRCS} )
 
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT winquake )
