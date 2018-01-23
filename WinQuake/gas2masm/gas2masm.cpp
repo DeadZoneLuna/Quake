@@ -779,7 +779,7 @@ tokenstat whitespace (char c)
 }
 
 
-int gettoken (void)
+tokenstat gettoken (void)
 {
 	char		c;
 	int			count, parencount;

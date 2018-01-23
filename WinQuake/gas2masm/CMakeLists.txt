@@ -5,7 +5,7 @@
 include( MSVCRuntime )
 
 set( PREP_SRCS
-	gas2masm.c
+	gas2masm.cpp
 )
 
 add_executable( gas2masm ${PREP_SRCS} )
