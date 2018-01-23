@@ -201,7 +201,12 @@ if( MSVC )
 	)
 endif()
 
-add_executable( winquake ${PREP_SRCS} )
+set( PROGDEFS
+	progdefs.q1
+	progdefs.q2
+)
+
+add_executable( winquake ${PREP_SRCS} ${PROGDEFS} )
 
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT winquake )
 
