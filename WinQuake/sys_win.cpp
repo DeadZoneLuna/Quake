@@ -52,10 +52,10 @@ static HANDLE	hFile;
 static HANDLE	heventParent;
 static HANDLE	heventChild;
 
-void MaskExceptions (void);
+extern "C" void MaskExceptions (void);
 void Sys_InitFloatTime (void);
-void Sys_PushFPCW_SetHigh (void);
-void Sys_PopFPCW (void);
+extern "C" void Sys_PushFPCW_SetHigh (void);
+extern "C" void Sys_PopFPCW (void);
 
 volatile int					sys_checksum;
 

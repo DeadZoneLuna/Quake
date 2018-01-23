@@ -163,9 +163,9 @@ extern	int		c_brush_polys, c_alias_polys;
 //
 // view origin
 //
-extern	vec3_t	vup;
-extern	vec3_t	vpn;
-extern	vec3_t	vright;
+extern	"C"	vec3_t	vup;
+extern	"C"	vec3_t	vpn;
+extern	"C"	vec3_t	vright;
 extern	vec3_t	r_origin;
 
 //

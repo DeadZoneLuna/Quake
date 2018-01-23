@@ -108,7 +108,8 @@ extern	int		reinit_surfcache;
 
 
 extern	refdef_t	r_refdef;
-extern vec3_t	r_origin, vpn, vright, vup;
+extern	vec3_t	r_origin;
+extern "C"	vec3_t	vpn, vright, vup;
 
 extern	struct texture_s	*r_notexture_mip;
 
