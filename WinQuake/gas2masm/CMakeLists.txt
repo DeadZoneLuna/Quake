@@ -12,11 +12,11 @@ add_executable( gas2masm ${PREP_SRCS} )
 
 configure_msvc_runtime( gas2masm STATIC )
 
-if( MSVC )
-	target_compile_definitions( gas2masm PRIVATE
-		_CRT_SECURE_NO_WARNINGS
-	)
-endif()
+target_compile_definitions( gas2masm PRIVATE
+	$<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
+	$<$<CXX_COMPILER_ID:MSVC>:$<$<CONFIG:Debug>:_DEBUG>>
+	$<$<CXX_COMPILER_ID:MSVC>:_CONSOLE>
+)
 
 if( MSVC )
 	set_target_properties( gas2masm PROPERTIES
