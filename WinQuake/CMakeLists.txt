@@ -29,55 +29,98 @@ else()
 endif()
 
 set( PREP_SRCS
+	anorm_dots.h
+	anorms.h
+	bspfile.h
 	cd_win.c
+	cdaudio.h
 	chase.c
 	cl_demo.c
 	cl_input.c
 	cl_main.c
 	cl_parse.c
 	cl_tent.c
+	client.h
 	cmd.c
+	cmd.h
 	common.c
 	common.h
 	conproc.c
+	conproc.h
 	console.c
+	console.h
 	crc.c
+	crc.h
 	cvar.c
+	cvar.h
+	dosisms.h
+	draw.h
 	host.c
 	host_cmd.c
 	in_win.c
+	input.h
 	keys.c
+	keys.h
 	math.s
 	mathlib.c
+	mathlib.h
 	menu.c
+	menu.h
+	model.h
+	modelgen.h
+	net.h
 	net_dgrm.c
+	net_dgrm.h
 	net_loop.c
+	net_loop.h
 	net_main.c
+	net_ser.h
 	net_vcr.c
+	net_vcr.h
 	net_win.c
 	net_wins.c
+	net_wins.h
 	net_wipx.c
+	net_wipx.h
 	pr_cmds.c
+	pr_comp.h
 	pr_edict.c
 	pr_exec.c
+	progdefs.h
+	progs.h
+	protocol.h
+	quakedef.h
 	r_part.c
+	render.h
 	sbar.c
+	sbar.h
+	screen.h
+	server.h
 	snd_dma.c
 	snd_mem.c
 	snd_mix.c
 	snd_mixa.s
 	snd_win.c
+	sound.h
+	spritegn.h
 	sv_main.c
 	sv_move.c
 	sv_phys.c
 	sv_user.c
+	sys.h
 	sys_win.c
 	sys_wina.s
+	vid.h
 	view.c
+	view.h
 	wad.c
+	wad.h
+	winquake.h
 	world.c
+	world.h
 	worlda.s
 	zone.c
+	zone.h
 )
 
 if( RENDERER_IS_SOFTWARE )
@@ -87,6 +130,7 @@ if( RENDERER_IS_SOFTWARE )
 		d_draw16.s
 		d_edge.c
 		d_fill.c
+		d_iface.h
 		d_init.c
 		d_modech.c
 		d_part.c
@@ -115,8 +159,10 @@ if( RENDERER_IS_SOFTWARE )
 		r_edgea.s
 		r_efrag.c
 		r_light.c
+		r_local.h
 		r_main.c
 		r_misc.c
+		r_shared.h
 		r_sky.c
 		r_sprite.c
 		r_surf.c
@@ -133,6 +179,7 @@ elseif( RENDERER_IS_OPENGL )
 		gl_draw.c
 		gl_mesh.c
 		gl_model.c
+		gl_model.h
 		gl_refrag.c
 		gl_rlight.c
 		gl_rmain.c
@@ -142,6 +189,8 @@ elseif( RENDERER_IS_OPENGL )
 		gl_test.c
 		gl_vidnt.c
 		gl_warp.c
+		gl_warp_sin.h
+		glquake.h
 	)
 endif()
 
