@@ -45,6 +45,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <setjmp.h>
 
+#ifdef WIN32
+#include <direct.h> //_mkdir
+#endif
+
 #if defined(_WIN32) && !defined(WINDED)
 
 #if defined(_M_IX86)

@@ -69,6 +69,7 @@ typedef struct
 gltexture_t	gltextures[MAX_GLTEXTURES];
 int			numgltextures;
 
+int GL_LoadPicTexture( qpic_t *pic );
 
 void GL_Bind (int texnum)
 {
