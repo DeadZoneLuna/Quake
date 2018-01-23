@@ -357,7 +357,7 @@ void Con_DebugLog(char *file, char *fmt, ...)
 	FILE* pFile;
     
     va_start(argptr, fmt);
-    vsprintf(data, fmt, argptr);
+    vsnprintf( data, sizeof( data ), fmt, argptr );
     va_end(argptr);
 	pFile = fopen( file, "a" );
 	fwrite( data, strlen( data ), 1, pFile );
