@@ -263,19 +263,24 @@ void R_DrawSpriteModel (entity_t *e)
 
 
 #define NUMVERTEXNORMALS	162
-
+#pragma warning( push )
+#pragma warning( disable: 4838 )
 float	r_avertexnormals[NUMVERTEXNORMALS][3] = {
 #include "anorms.h"
 };
+#pragma warning( pop )
 
 vec3_t	shadevector;
 float	shadelight, ambientlight;
 
 // precalculated dot products for quantized angles
 #define SHADEDOT_QUANT 16
+#pragma warning( push )
+#pragma warning( disable: 4838 )
 float	r_avertexnormal_dots[SHADEDOT_QUANT][256] =
 #include "anorm_dots.h"
 ;
+#pragma warning( pop )
 
 float	*shadedots = r_avertexnormal_dots[0];
 

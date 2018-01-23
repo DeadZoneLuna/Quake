@@ -176,12 +176,14 @@ void GL_SubdivideSurface (msurface_t *fa)
 //=========================================================
 
 
-
+#pragma warning( push )
+#pragma warning( disable: 4838 )
 // speed up sin calculations - Ed
 float	turbsin[] =
 {
 	#include "gl_warp_sin.h"
 };
+#pragma warning( pop )
 #define TURBSCALE (256.0 / (2 * M_PI))
 
 /*
