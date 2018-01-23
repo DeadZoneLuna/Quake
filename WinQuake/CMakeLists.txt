@@ -161,6 +161,10 @@ if( RENDERER_IS_SOFTWARE )
 	)
 endif()
 
+target_compile_definitions( winquake PRIVATE
+	$<$<CXX_COMPILER_ID:MSVC>:$<$<CONFIG:Debug>:_DEBUG>>
+)
+
 if( RENDERER_IS_OPENGL )
 	target_compile_definitions( winquake PRIVATE
 		$<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
