@@ -974,7 +974,7 @@ IN_Commands
 */
 void IN_Commands (void)
 {
-	int		i, key_index;
+	int		key_index;
 	DWORD	buttonstate, povstate;
 
 	if (!joy_avail)
@@ -986,7 +986,7 @@ void IN_Commands (void)
 	// loop through the joystick buttons
 	// key a joystick event or auxillary event for higher number buttons for each state change
 	buttonstate = ji.dwButtons;
-	for (i=0 ; i < joy_numbuttons ; i++)
+	for (DWORD i=0 ; i < joy_numbuttons ; i++)
 	{
 		if ( (buttonstate & (1<<i)) && !(joy_oldbuttonstate & (1<<i)) )
 		{
@@ -1020,7 +1020,7 @@ void IN_Commands (void)
 				povstate |= 0x08;
 		}
 		// determine which bits have changed and key an auxillary event for each change
-		for (i=0 ; i < 4 ; i++)
+		for (int i=0 ; i < 4 ; i++)
 		{
 			if ( (povstate & (1<<i)) && !(joy_oldpovstate & (1<<i)) )
 			{

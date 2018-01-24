@@ -874,7 +874,7 @@ void S_Update_(void)
 // mix ahead of current position
 	endtime = soundtime + _snd_mixahead.value * shm->speed;
 	samps = shm->samples >> (shm->channels-1);
-	if (endtime - soundtime > samps)
+	if (endtime - soundtime > static_cast<unsigned>( samps ) )
 		endtime = soundtime + samps;
 
 #ifdef _WIN32

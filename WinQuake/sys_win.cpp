@@ -785,7 +785,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	if (parms.memsize < MINIMUM_WIN_MEMORY)
 		parms.memsize = MINIMUM_WIN_MEMORY;
 
-	if (parms.memsize < (lpBuffer.dwTotalPhys >> 1))
+	if (static_cast<decltype( lpBuffer.dwTotalPhys )>( parms.memsize ) < (lpBuffer.dwTotalPhys >> 1))
 		parms.memsize = lpBuffer.dwTotalPhys >> 1;
 
 	if (parms.memsize > MAXIMUM_WIN_MEMORY)

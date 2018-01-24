@@ -1206,7 +1206,7 @@ void Sbar_MiniDeathmatchOverlay (void)
             i = 0;
 
 	x = 324;
-	for (/* */; i < scoreboardlines && y < vid.height - 8 ; i++)
+	for (/* */; i < scoreboardlines && y < static_cast<int>( vid.height - 8 ); i++)
 	{
 		k = fragsort[i];
 		s = &cl.scores[k];

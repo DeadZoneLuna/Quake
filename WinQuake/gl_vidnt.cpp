@@ -261,9 +261,9 @@ qboolean VID_SetWindowedMode (int modenum)
 	PatBlt(hdc,0,0,WindowRect.right,WindowRect.bottom,BLACKNESS);
 	ReleaseDC(dibwindow, hdc);
 
-	if (vid.conheight > modelist[modenum].height)
+	if (vid.conheight > static_cast<unsigned int>( modelist[modenum].height ) )
 		vid.conheight = modelist[modenum].height;
-	if (vid.conwidth > modelist[modenum].width)
+	if (vid.conwidth > static_cast<unsigned int>( modelist[modenum].width ) )
 		vid.conwidth = modelist[modenum].width;
 	vid.width = vid.conwidth;
 	vid.height = vid.conheight;
@@ -346,9 +346,9 @@ qboolean VID_SetFullDIBMode (int modenum)
 	PatBlt(hdc,0,0,WindowRect.right,WindowRect.bottom,BLACKNESS);
 	ReleaseDC(dibwindow, hdc);
 
-	if (vid.conheight > modelist[modenum].height)
+	if (vid.conheight > static_cast<unsigned int>( modelist[modenum].height ) )
 		vid.conheight = modelist[modenum].height;
-	if (vid.conwidth > modelist[modenum].width)
+	if (vid.conwidth > static_cast<unsigned int>( modelist[modenum].width ) )
 		vid.conwidth = modelist[modenum].width;
 	vid.width = vid.conwidth;
 	vid.height = vid.conheight;

@@ -319,11 +319,11 @@ void R_TranslatePlayerSkin (int playernum)
 		out2 = (byte *)pixels;
 		memset(pixels, 0, sizeof(pixels));
 		fracstep = inwidth*0x10000/scaled_width;
-		for (i=0 ; i<scaled_height ; i++, out2 += scaled_width)
+		for (i=0 ; static_cast<unsigned int>( i ) < scaled_height ; i++, out2 += scaled_width)
 		{
 			inrow = original + inwidth*(i*inheight/scaled_height);
 			frac = fracstep >> 1;
-			for (j=0 ; j<scaled_width ; j+=4)
+			for (j=0 ; static_cast<unsigned int>( j ) < scaled_width ; j+=4)
 			{
 				out2[j] = translate[inrow[frac>>16]];
 				frac += fracstep;
@@ -345,11 +345,11 @@ void R_TranslatePlayerSkin (int playernum)
 
 	out = pixels;
 	fracstep = inwidth*0x10000/scaled_width;
-	for (i=0 ; i<scaled_height ; i++, out += scaled_width)
+	for (i=0 ; static_cast<unsigned int>( i ) < scaled_height ; i++, out += scaled_width)
 	{
 		inrow = original + inwidth*(i*inheight/scaled_height);
 		frac = fracstep >> 1;
-		for (j=0 ; j<scaled_width ; j+=4)
+		for (j=0 ; static_cast<unsigned int>( j ) < scaled_width ; j+=4)
 		{
 			out[j] = translate32[inrow[frac>>16]];
 			frac += fracstep;
