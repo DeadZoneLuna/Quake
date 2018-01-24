@@ -265,7 +265,7 @@ extern "C"
 {
 #define NUMVERTEXNORMALS	162
 #pragma warning( push )
-#pragma warning( disable: 4838 )
+#pragma warning( disable: 4838 4305 )
 float	r_avertexnormals[ NUMVERTEXNORMALS ][ 3 ] = {
 #include "anorms.h"
 };
@@ -278,7 +278,7 @@ float	shadelight, ambientlight;
 // precalculated dot products for quantized angles
 #define SHADEDOT_QUANT 16
 #pragma warning( push )
-#pragma warning( disable: 4838 )
+#pragma warning( disable: 4838 4305 )
 float	r_avertexnormal_dots[SHADEDOT_QUANT][256] =
 #include "anorm_dots.h"
 ;
@@ -1010,7 +1010,7 @@ void R_Clear (void)
 		if (trickframe & 1)
 		{
 			gldepthmin = 0;
-			gldepthmax = 0.49999;
+			gldepthmax = 0.49999f;
 			glDepthFunc (GL_LEQUAL);
 		}
 		else

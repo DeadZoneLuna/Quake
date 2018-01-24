@@ -177,7 +177,7 @@ void GL_SubdivideSurface (msurface_t *fa)
 
 
 #pragma warning( push )
-#pragma warning( disable: 4838 )
+#pragma warning( disable: 4838 4305 )
 // speed up sin calculations - Ed
 float	turbsin[] =
 {

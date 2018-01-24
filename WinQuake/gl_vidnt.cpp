@@ -622,7 +622,7 @@ void GL_Init (void)
 	glEnable(GL_TEXTURE_2D);
 
 	glEnable(GL_ALPHA_TEST);
-	glAlphaFunc(GL_GREATER, 0.666);
+	glAlphaFunc(GL_GREATER, 0.666f);
 
 	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 	glShadeModel (GL_FLAT);
@@ -1546,7 +1546,7 @@ static void Check_Gamma (unsigned char *pal)
 			(gl_vendor && strstr(gl_vendor, "3Dfx")))
 			vid_gamma = 1;
 		else
-			vid_gamma = 0.7; // default to 0.7 on non-3dfx hardware
+			vid_gamma = 0.7f; // default to 0.7 on non-3dfx hardware
 	} else
 		vid_gamma = Q_atof(com_argv[i+1]);
 

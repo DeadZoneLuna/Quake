@@ -89,7 +89,7 @@ void R_RenderDlight (dlight_t *light)
 	}
 
 	glBegin (GL_TRIANGLE_FAN);
-	glColor3f (0.2,0.1,0.0);
+	glColor3f (0.2f,0.1f,0.0f);
 	for (i=0 ; i<3 ; i++)
 		v[i] = light->origin[i] - vpn[i]*rad;
 	glVertex3fv (v);
