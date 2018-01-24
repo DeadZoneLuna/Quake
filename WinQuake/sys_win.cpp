@@ -68,7 +68,7 @@ Sys_PageIn
 void Sys_PageIn (void *ptr, int size)
 {
 	byte	*x;
-	int		j, m, n;
+	int		m, n;
 
 // touch all the memory to make sure it's there. The 16-page skip is to
 // keep Win 95 from thinking we're trying to page ourselves in (we are
@@ -557,8 +557,6 @@ char *Sys_ConsoleInput (void)
 	static char	text[256];
 	static int		len;
 	INPUT_RECORD	recs[1024];
-	int		count;
-	int		i;
 	int		ch;
 	DWORD dummy;
 	DWORD numread, numevents;
@@ -693,7 +691,6 @@ HWND		hwnd_dialog;
 
 int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    MSG				msg;
 	quakeparms_t	parms;
 	double			time, oldtime, newtime;
 	MEMORYSTATUS	lpBuffer;
