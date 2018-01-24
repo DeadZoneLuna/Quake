@@ -207,10 +207,10 @@ void S_TransferPaintBuffer(int endtime)
 		{
 			val = (*p * snd_vol) >> 8;
 			p+= step;
-			if (val > 0x7fff)
-				val = 0x7fff;
-			else if (val < (short)0x8000)
-				val = (short)0x8000;
+			if (val > INT16_MAX)
+				val = INT16_MAX;
+			else if (val < INT16_MIN)
+				val = INT16_MIN;
 			out[out_idx] = val;
 			out_idx = (out_idx + 1) & out_mask;
 		}
@@ -222,10 +222,10 @@ void S_TransferPaintBuffer(int endtime)
 		{
 			val = (*p * snd_vol) >> 8;
 			p+= step;
-			if (val > 0x7fff)
-				val = 0x7fff;
-			else if (val < (short)0x8000)
-				val = (short)0x8000;
+			if (val > INT16_MAX)
+				val = INT16_MAX;
+			else if (val < INT16_MIN)
+				val = INT16_MIN;
 			out[out_idx] = (val>>8) + 128;
 			out_idx = (out_idx + 1) & out_mask;
 		}
@@ -248,7 +248,6 @@ void S_TransferPaintBuffer(int endtime)
 	}
 #endif
 }
-
 
 /*
 ===============================================================================
