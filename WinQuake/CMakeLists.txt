@@ -282,7 +282,8 @@ if( MSVC )
 		# TODO: once all code has upgraded away from qboolean, remove this
 		# Disable warning 4244: '=': conversion from 'type1' to 'type2', possible loss of data
 		# Disable warning 4100: 'parameter': unreferenced formal parameter
-		COMPILE_FLAGS "/W2 /wd4805 /wd4244 /wd4100"
+		# Disable warning 4459: declaration of 'local variable' hides global declaration
+		COMPILE_FLAGS "/W2 /wd4805 /wd4244 /wd4100 /wd4459"
 		# Uses WinMain entry point
 		# /SAFESEH:NO is needed because of assembly files. Can be removed once those are gone
 		LINK_FLAGS "/SUBSYSTEM:WINDOWS /SAFESEH:NO ${IGNORE_LIBC}"
