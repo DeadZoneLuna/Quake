@@ -442,8 +442,8 @@ r_refdef.viewangles[2]=    0;
 	{
 		if (r_dowarp)
 		{
-			if ((vid.width <= vid.maxwarpwidth) &&
-				(vid.height <= vid.maxwarpheight))
+			if ((vid.width <= static_cast<unsigned int>( vid.maxwarpwidth ) ) &&
+				(vid.height <= static_cast<unsigned int>( vid.maxwarpheight ) ))
 			{
 				vrect.x = 0;
 				vrect.y = 0;

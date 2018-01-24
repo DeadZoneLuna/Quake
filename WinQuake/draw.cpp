@@ -293,9 +293,9 @@ void Draw_Pic (int x, int y, qpic_t *pic)
 	int				v, u;
 
 	if ((x < 0) ||
-		(x + pic->width > vid.width) ||
+		( static_cast<unsigned int>( x + pic->width ) > vid.width) ||
 		(y < 0) ||
-		(y + pic->height > vid.height))
+		( static_cast<unsigned int>( y + pic->height ) > vid.height))
 	{
 		Sys_Error ("Draw_Pic: bad coordinates");
 	}
@@ -538,7 +538,7 @@ Draw_ConsoleBackground
 */
 void Draw_ConsoleBackground (int lines)
 {
-	int				x, y, v;
+	int				y, v;
 	byte			*src, *dest;
 	unsigned short	*pusdest;
 	int				f, fstep;
@@ -562,7 +562,7 @@ void Draw_ConsoleBackground (int lines)
 	sprintf (ver, "%4.2f", VERSION);
 #endif
 
-	for (x=0 ; x<strlen(ver) ; x++)
+	for (size_t x=0 ; x<strlen(ver) ; x++)
 		Draw_CharToConback (ver[x], dest+(x<<3));
 	
 // draw the pic
@@ -580,7 +580,7 @@ void Draw_ConsoleBackground (int lines)
 			{
 				f = 0;
 				fstep = 320*0x10000/vid.conwidth;
-				for (x=0 ; x<vid.conwidth ; x+=4)
+				for (unsigned int x=0 ; x<vid.conwidth ; x+=4)
 				{
 					dest[x] = src[f>>16];
 					f += fstep;
@@ -606,7 +606,7 @@ void Draw_ConsoleBackground (int lines)
 			src = conback->data + v*320;
 			f = 0;
 			fstep = 320*0x10000/vid.conwidth;
-			for (x=0 ; x<vid.conwidth ; x+=4)
+			for (unsigned int x=0 ; x<vid.conwidth ; x+=4)
 			{
 				pusdest[x] = d_8to16table[src[f>>16]];
 				f += fstep;
@@ -843,21 +843,20 @@ Draw_FadeScreen
 */
 void Draw_FadeScreen (void)
 {
-	int			x,y;
 	byte		*pbuf;
 
 	VID_UnlockBuffer ();
 	S_ExtraUpdate ();
 	VID_LockBuffer ();
 
-	for (y=0 ; y<vid.height ; y++)
+	for (unsigned int y=0 ; y<vid.height ; y++)
 	{
 		int	t;
 
 		pbuf = (byte *)(vid.buffer + vid.rowbytes*y);
 		t = (y & 1) << 1;
 
-		for (x=0 ; x<vid.width ; x++)
+		for (unsigned int x=0 ; x<vid.width ; x++)
 		{
 			if ((x & 3) != t)
 				pbuf[x] = 0;
