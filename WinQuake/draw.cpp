@@ -849,10 +849,8 @@ void Draw_FadeScreen (void)
 
 	for (unsigned int y=0 ; y<vid.height ; y++)
 	{
-		int	t;
-
 		pbuf = (byte *)(vid.buffer + vid.rowbytes*y);
-		t = (y & 1) << 1;
+		const unsigned int t = (y & 1) << 1;
 
 		for (unsigned int x=0 ; x<vid.width ; x++)
 		{
