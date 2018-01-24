@@ -202,7 +202,7 @@ void R_SetupAndDrawSprite ()
 		TransformVector (local, transformed);
 
 		if (transformed[2] < NEAR_CLIP)
-			transformed[2] = NEAR_CLIP;
+			transformed[2] = static_cast<vec_t>( NEAR_CLIP );
 
 		pout = &outverts[i];
 		pout->zi = 1.0 / transformed[2];

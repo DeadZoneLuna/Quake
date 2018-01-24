@@ -848,7 +848,7 @@ void R_RenderPoly (msurface_t *fa, int clipflags)
 		TransformVector (local, transformed);
 
 		if (transformed[2] < NEAR_CLIP)
-			transformed[2] = NEAR_CLIP;
+			transformed[2] = static_cast<vec_t>( NEAR_CLIP );
 
 		lzi = 1.0 / transformed[2];
 

@@ -80,7 +80,7 @@ static aedge_t	aedges[12] = {
 extern "C"
 {
 #pragma warning( push )
-#pragma warning( disable: 4838 )
+#pragma warning( disable: 4838 4305 )
 float	r_avertexnormals[ NUMVERTEXNORMALS ][ 3 ] = {
 #include "anorms.h"
 };
