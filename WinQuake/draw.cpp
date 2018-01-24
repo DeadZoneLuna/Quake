@@ -109,8 +109,6 @@ Draw_Init
 */
 void Draw_Init (void)
 {
-	int		i;
-
 	draw_chars = reinterpret_cast<byte*>( W_GetLumpName ("conchars") );
 	draw_disc = reinterpret_cast<qpic_t*>( W_GetLumpName ("disc") );
 	draw_backtile = reinterpret_cast<qpic_t*>( W_GetLumpName ("backtile") );
