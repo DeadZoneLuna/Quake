@@ -800,7 +800,7 @@ void IN_StartupJoystick (void)
 { 
 	int			numdevs;
 	JOYCAPS		jc;
-	MMRESULT	mmr;
+	MMRESULT	mmr = JOYERR_NOERROR;
  
  	// assume no joystick
 	joy_avail = false; 

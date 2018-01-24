@@ -72,7 +72,7 @@ void S_TransferStereo16 (int endtime)
 	DWORD	*pbuf;
 #ifdef _WIN32
 	int		reps;
-	DWORD	dwSize,dwSize2;
+	DWORD	dwSize = 0,dwSize2;
 	DWORD	*pbuf2;
 	HRESULT	hresult;
 #endif
@@ -151,7 +151,7 @@ void S_TransferPaintBuffer(int endtime)
 	DWORD	*pbuf;
 #ifdef _WIN32
 	int		reps;
-	DWORD	dwSize,dwSize2;
+	DWORD	dwSize = 0,dwSize2;
 	DWORD	*pbuf2;
 	HRESULT	hresult;
 #endif
