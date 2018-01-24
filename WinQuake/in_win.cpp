@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // in_win.c -- windows 95 mouse and joystick code
 // 02/21/97 JCB Added extended DirectInput code to support external controllers.
 
+#include <cassert>
 #include <dinput.h>
 #include "quakedef.h"
 #include "winquake.h"
@@ -56,12 +57,19 @@ static unsigned int		mstate_di;
 #define JOY_ABSOLUTE_AXIS	0x00000000		// control like a joystick
 #define JOY_RELATIVE_AXIS	0x00000010		// control like a mouse, spinner, trackball
 #define	JOY_MAX_AXES		6				// X, Y, Z, R, U, V
-#define JOY_AXIS_X			0
-#define JOY_AXIS_Y			1
-#define JOY_AXIS_Z			2
-#define JOY_AXIS_R			3
-#define JOY_AXIS_U			4
-#define JOY_AXIS_V			5
+enum JoyAxis
+{
+	JOY_AXIS_FIRST	=	0,
+
+	JOY_AXIS_X		= JOY_AXIS_FIRST,
+	JOY_AXIS_Y		=	1,
+	JOY_AXIS_Z		=	2,
+	JOY_AXIS_R		=	3,
+	JOY_AXIS_U		=	4,
+	JOY_AXIS_V		=	5,
+
+	JOY_AXIS_LAST = JOY_AXIS_V
+};
 
 enum _ControlList
 {
@@ -863,7 +871,7 @@ void IN_StartupJoystick (void)
 RawValuePointer
 ===========
 */
-PDWORD RawValuePointer (int axis)
+PDWORD RawValuePointer (JoyAxis axis)
 {
 	switch (axis)
 	{
@@ -879,6 +887,10 @@ PDWORD RawValuePointer (int axis)
 		return &ji.dwUpos;
 	case JOY_AXIS_V:
 		return &ji.dwVpos;
+
+	default:
+		assert( false );
+		return nullptr;
 	}
 }
 
@@ -897,11 +909,11 @@ void Joy_AdvancedUpdate_f (void)
 	DWORD dwTemp;
 
 	// initialize all the maps
-	for (i = 0; i < JOY_MAX_AXES; i++)
+	for (i = JOY_AXIS_FIRST; i <= JOY_AXIS_LAST; i++)
 	{
 		dwAxisMap[i] = AxisNada;
 		dwControlMap[i] = JOY_ABSOLUTE_AXIS;
-		pdwRawValue[i] = RawValuePointer(i);
+		pdwRawValue[i] = RawValuePointer( static_cast<JoyAxis>( i ) );
 	}
 
 	if( joy_advanced.value == 0.0)
