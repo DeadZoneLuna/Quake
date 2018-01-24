@@ -284,7 +284,7 @@ if( MSVC )
 		# Disable warning 4100: 'parameter': unreferenced formal parameter
 		# Disable warning 4459: declaration of 'local variable' hides global declaration
 		# Disable warning 4611: interaction between '_setjmp' and C++ object destruction is non-portable TODO remove setjmp and use proper error handling
-		COMPILE_FLAGS "/W2 /wd4805 /wd4244 /wd4100 /wd4459 /wd4611"
+		COMPILE_FLAGS "/W4 /wd4805 /wd4244 /wd4100 /wd4459 /wd4611"
 		# Uses WinMain entry point
 		# /SAFESEH:NO is needed because of assembly files. Can be removed once those are gone
 		LINK_FLAGS "/SUBSYSTEM:WINDOWS /SAFESEH:NO ${IGNORE_LIBC}"
