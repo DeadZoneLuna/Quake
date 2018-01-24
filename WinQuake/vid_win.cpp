@@ -383,7 +383,7 @@ void registerAllMemDrivers(void)
 void VID_InitMGLFull (HINSTANCE hInstance)
 {
 	int			i, xRes, yRes, bits, lowres, curmode, temp;
-	int			lowstretchedres, stretchedmode, lowstretched;
+	int			lowstretchedres, stretchedmode = 0, lowstretched;
     uchar		*m;
 
 // FIXME: NT is checked for because MGL currently has a bug that causes it
@@ -709,7 +709,7 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 	DEVMODE	devmode;
 	int		i, j, modenum, existingmode, originalnummodes, lowestres;
 	int		numlowresmodes, bpp, done;
-	int		cstretch, istretch, mstretch;
+	int		cstretch, istretch, mstretch = 0;
 	BOOL	stat;
 
 // enumerate 8 bpp modes
@@ -2052,7 +2052,7 @@ void VID_ForceMode_f (void)
 
 void	VID_Init (unsigned char *palette)
 {
-	int		i, bestmatch, bestmatchmetric, t, dr, dg, db;
+	int		i, bestmatch = 0, bestmatchmetric, t, dr, dg, db;
 	int		basenummodes;
 	byte	*ptmp;
 
@@ -3063,7 +3063,7 @@ void VID_MenuDraw (void)
 {
 	qpic_t		*p;
 	char		*ptr;
-	int			lnummodes, i, j, k, column, row, dup, dupmode;
+	int			lnummodes, i, j, k, column, row, dup, dupmode = 0;
 	char		temp[100];
 	vmode_t		*pv;
 	modedesc_t	tmodedesc;
