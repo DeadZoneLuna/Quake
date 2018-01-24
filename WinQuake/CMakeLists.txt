@@ -240,13 +240,13 @@ if( RENDERER_IS_SOFTWARE )
 endif()
 
 target_compile_definitions( winquake PRIVATE
+	$<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
 	$<$<CXX_COMPILER_ID:MSVC>:$<$<CONFIG:Debug>:_DEBUG>>
 	$<$<CXX_COMPILER_ID:MSVC>:CINTERFACE> #DirectX interfaces need this (for now)
 )
 
 if( RENDERER_IS_OPENGL )
 	target_compile_definitions( winquake PRIVATE
-		$<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
 		GLQUAKE
 	)
 endif()
