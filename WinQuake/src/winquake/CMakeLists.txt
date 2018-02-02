@@ -222,12 +222,12 @@ set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT winquake )
 configure_msvc_runtime( winquake STATIC )
 
 target_include_directories( winquake PRIVATE
-	$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/dxsdk/sdk/inc>
+	$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/external/dxsdk/sdk/inc>
 )
 
 if( RENDERER_IS_SOFTWARE )
 	target_include_directories( winquake PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}/scitech/include
+		${CMAKE_SOURCE_DIR}/external/scitech/include
 	)
 endif()
 
@@ -247,12 +247,12 @@ target_link_libraries( winquake PRIVATE
 	$<$<CXX_COMPILER_ID:MSVC>:winmm>
 	$<$<CXX_COMPILER_ID:MSVC>:wsock32>
 	$<$<CXX_COMPILER_ID:MSVC>:comctl32>
-	$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/dxsdk/sdk/lib/dxguid.lib>
+	$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/external/dxsdk/sdk/lib/dxguid.lib>
 )
 
 if( RENDERER_IS_SOFTWARE )
 	target_link_libraries( winquake PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}/scitech/lib/win32/vc/mgllt.lib
+		${CMAKE_SOURCE_DIR}/external/scitech/lib/win32/vc/mgllt.lib
 	)
 endif()
 
