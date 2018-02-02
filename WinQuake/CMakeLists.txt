@@ -7,6 +7,7 @@ list( APPEND CMAKE_MODULE_PATH
 	"${CMAKE_CURRENT_LIST_DIR}/../cmake"
 )
 
+include( InputFilesList )
 include( MSVCRuntime )
 
 cmake_minimum_required( VERSION 3.10 )
@@ -28,7 +29,7 @@ else()
 	message( FATAL_ERROR "Unknown renderer ${WINQUAKE_RENDERER} selected" )
 endif()
 
-set( PREP_SRCS
+add_sources(
 	anorm_dots.h
 	anorms.h
 	bspfile.h
@@ -121,8 +122,7 @@ set( PREP_SRCS
 )
 
 if( MSVC )
-	set( PREP_SRCS
-		${PREP_SRCS}
+	add_sources(
 		cd_win.cpp
 		snd_win.cpp
 		sys_win.cpp
@@ -131,8 +131,7 @@ if( MSVC )
 endif()
 
 if( UNIX )
-	set( PREP_SRCS
-		${PREP_SRCS}
+	add_sources(
 		cd_linux.cpp
 		snd_linux.cpp
 		sys_dosa.s
@@ -141,8 +140,7 @@ if( UNIX )
 endif()
 
 if( RENDERER_IS_SOFTWARE )
-	set( PREP_SRCS
-		${PREP_SRCS}
+	add_sources(
 		d_draw.s
 		d_draw16.s
 		d_edge.cpp
@@ -191,8 +189,7 @@ if( RENDERER_IS_SOFTWARE )
 		vid_win.cpp
 	)
 elseif( RENDERER_IS_OPENGL )
-	set( PREP_SRCS
-		${PREP_SRCS}
+	add_sources(
 		gl_draw.cpp
 		gl_mesh.cpp
 		gl_model.cpp
@@ -212,8 +209,7 @@ elseif( RENDERER_IS_OPENGL )
 endif()
 
 if( MSVC )
-	set( PREP_SRCS
-		${PREP_SRCS}
+	add_sources(
 		winquake.rc
 	)
 endif()
@@ -223,7 +219,14 @@ set( PROGDEFS
 	progdefs.q2
 )
 
+preprocess_sources()
+
 add_executable( winquake ${PREP_SRCS} ${PROGDEFS} )
+
+#Create filters
+create_source_groups( ${CMAKE_SOURCE_DIR} )
+
+clear_sources()
 
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT winquake )
 

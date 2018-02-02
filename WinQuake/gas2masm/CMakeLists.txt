@@ -2,13 +2,21 @@
 # gas2masm: GNU Assembly to Microsoft Macro Assembler converter
 #
 
+include( InputFilesList )
 include( MSVCRuntime )
 
-set( PREP_SRCS
+add_sources(
 	gas2masm.cpp
 )
 
+preprocess_sources()
+
 add_executable( gas2masm ${PREP_SRCS} )
+
+#Create filters
+create_source_groups( ${CMAKE_SOURCE_DIR} )
+
+clear_sources()
 
 configure_msvc_runtime( gas2masm STATIC )
 
