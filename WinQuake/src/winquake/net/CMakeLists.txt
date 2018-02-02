@@ -1,0 +1,16 @@
+add_sources(
+	net.h
+	net_dgrm.cpp
+	net_dgrm.h
+	net_loop.cpp
+	net_loop.h
+	net_main.cpp
+	net_ser.h
+	net_vcr.cpp
+	net_vcr.h
+	net_win.cpp
+	net_wins.cpp
+	net_wins.h
+	net_wipx.cpp
+	net_wipx.h
+)

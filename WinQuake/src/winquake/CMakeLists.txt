@@ -56,20 +56,6 @@ add_sources(
 	menu.cpp
 	menu.h
 	modelgen.h
-	net.h
-	net_dgrm.cpp
-	net_dgrm.h
-	net_loop.cpp
-	net_loop.h
-	net_main.cpp
-	net_ser.h
-	net_vcr.cpp
-	net_vcr.h
-	net_win.cpp
-	net_wins.cpp
-	net_wins.h
-	net_wipx.cpp
-	net_wipx.h
 	pr_cmds.cpp
 	pr_comp.h
 	pr_edict.cpp
@@ -110,6 +96,7 @@ add_sources(
 	renderer/d_ifacea.h
 )
 
+add_subdirectory( net )
 if( MSVC )
 	add_sources(
 		cd_win.cpp
