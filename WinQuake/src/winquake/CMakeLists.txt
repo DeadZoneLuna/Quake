@@ -55,7 +55,6 @@ add_sources(
 	mathlib.h
 	menu.cpp
 	menu.h
-	model.h
 	modelgen.h
 	net.h
 	net_dgrm.cpp
@@ -108,6 +107,7 @@ add_sources(
 	worlda.s
 	zone.cpp
 	zone.h
+	renderer/d_ifacea.h
 )
 
 if( MSVC )
@@ -129,72 +129,9 @@ if( UNIX )
 endif()
 
 if( RENDERER_IS_SOFTWARE )
-	add_sources(
-		d_draw.s
-		d_draw16.s
-		d_edge.cpp
-		d_fill.cpp
-		d_iface.h
-		d_init.cpp
-		d_modech.cpp
-		d_part.cpp
-		d_parta.s
-		d_polysa.s
-		d_polyse.cpp
-		d_scan.cpp
-		d_scana.s
-		d_sky.cpp
-		d_spr8.s
-		d_sprite.cpp
-		d_surf.cpp
-		d_vars.cpp
-		d_varsa.s
-		d_zpoint.cpp
-		draw.cpp
-		model.cpp
-		r_aclip.cpp
-		r_aclipa.s
-		r_alias.cpp
-		r_aliasa.s
-		r_bsp.cpp
-		r_draw.cpp
-		r_drawa.s
-		r_edge.cpp
-		r_edgea.s
-		r_efrag.cpp
-		r_light.cpp
-		r_local.h
-		r_main.cpp
-		r_misc.cpp
-		r_shared.h
-		r_sky.cpp
-		r_sprite.cpp
-		r_surf.cpp
-		r_vars.cpp
-		r_varsa.s
-		screen.cpp
-		surf8.s
-		surf16.s
-		vid_win.cpp
-	)
+	add_subdirectory( renderer/software )
 elseif( RENDERER_IS_OPENGL )
-	add_sources(
-		gl_draw.cpp
-		gl_mesh.cpp
-		gl_model.cpp
-		gl_model.h
-		gl_refrag.cpp
-		gl_rlight.cpp
-		gl_rmain.cpp
-		gl_rmisc.cpp
-		gl_rsurf.cpp
-		gl_screen.cpp
-		gl_test.cpp
-		gl_vidnt.cpp
-		gl_warp.cpp
-		gl_warp_sin.h
-		glquake.h
-	)
+	add_subdirectory( renderer/opengl )
 endif()
 
 if( MSVC )
@@ -222,8 +159,16 @@ set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT winquake )
 configure_msvc_runtime( winquake STATIC )
 
 target_include_directories( winquake PRIVATE
-	$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/external/dxsdk/sdk/inc>
+	${CMAKE_CURRENT_SOURCE_DIR}
+	#$<$<CXX_COMPILER_ID:MSVC>:${CMAKE_SOURCE_DIR}/external/dxsdk/sdk/inc>
 )
+
+# TODO: replace with the generator expression above when assembly files have been converted - Solokiller
+if( MSVC )
+	target_include_directories( winquake PRIVATE
+		${CMAKE_SOURCE_DIR}/external/dxsdk/sdk/inc
+	)
+endif()
 
 if( RENDERER_IS_SOFTWARE )
 	target_include_directories( winquake PRIVATE
@@ -283,18 +228,25 @@ if( MSVC )
 	)
 endif()
 
+# TODO: for now we need to know which directories to look in, needs to be removed once assembly files are converted - Solokiller
+get_target_property( include_dirs winquake INCLUDE_DIRECTORIES )
+
+foreach( dir IN LISTS include_dirs )
+	set( ASM_INCLUDE_DIRS ${ASM_INCLUDE_DIRS} /I ${dir} )
+endforeach()
+
 # Until we get rid of assembly code we'll need to add these custom builds
 function( configure_asm_file filename )
 	set( OUT_FILENAME ${CMAKE_CURRENT_BINARY_DIR}/${filename} )
 	
 	if( MSVC )
 		# Some commands can't handle forward slashes, so make sure they're all replaced
-		STRING( REGEX REPLACE "/" "\\\\" OUT_FILENAME ${OUT_FILENAME} ) 
+		string( REGEX REPLACE "/" "\\\\" OUT_FILENAME ${OUT_FILENAME} ) 
 		
 		add_custom_command(
 			OUTPUT ${filename}.obj
 			MAIN_DEPENDENCY ${filename}.s
-			COMMAND cl /EP > ${OUT_FILENAME}.spp ${CMAKE_CURRENT_SOURCE_DIR}\\${filename}.s
+			COMMAND cl ${ASM_INCLUDE_DIRS} /EP > ${OUT_FILENAME}.spp ${CMAKE_CURRENT_SOURCE_DIR}\\${filename}.s
 			COMMAND $<TARGET_FILE:gas2masm> < ${OUT_FILENAME}.spp > ${OUT_FILENAME}.asm
 			COMMAND ml /c /Cp /coff /Fo${OUT_FILENAME}.obj /Zm /Zi ${OUT_FILENAME}.asm
 			COMMAND del ${OUT_FILENAME}.spp
@@ -315,20 +267,20 @@ endif()
 
 # Software renderer specific assembly files
 if( RENDERER_IS_SOFTWARE )
-	configure_asm_file( d_draw )
-	configure_asm_file( d_draw16 )
-	configure_asm_file( d_parta )
-	configure_asm_file( d_polysa )
-	configure_asm_file( d_scana )
-	configure_asm_file( d_spr8 )
-	configure_asm_file( d_varsa )
-	configure_asm_file( r_aclipa )
-	configure_asm_file( r_aliasa )
-	configure_asm_file( r_drawa )
-	configure_asm_file( r_edgea )
-	configure_asm_file( r_varsa )
-	configure_asm_file( surf8 )
-	configure_asm_file( surf16 )
+	configure_asm_file( renderer/software/d_draw )
+	configure_asm_file( renderer/software/d_draw16 )
+	configure_asm_file( renderer/software/d_parta )
+	configure_asm_file( renderer/software/d_polysa )
+	configure_asm_file( renderer/software/d_scana )
+	configure_asm_file( renderer/software/d_spr8 )
+	configure_asm_file( renderer/software/d_varsa )
+	configure_asm_file( renderer/software/r_aclipa )
+	configure_asm_file( renderer/software/r_aliasa )
+	configure_asm_file( renderer/software/r_drawa )
+	configure_asm_file( renderer/software/r_edgea )
+	configure_asm_file( renderer/software/r_varsa )
+	configure_asm_file( renderer/software/surf8 )
+	configure_asm_file( renderer/software/surf16 )
 endif()
 
 set_target_properties( winquake PROPERTIES

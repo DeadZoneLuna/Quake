@@ -253,10 +253,10 @@ typedef struct
 #include "server.h"
 
 #ifdef GLQUAKE
-#include "gl_model.h"
+#include "renderer/opengl/gl_model.h"
 #else
-#include "model.h"
-#include "d_iface.h"
+#include "renderer/software/model.h"
+#include "renderer/software/d_iface.h"
 #endif
 
 #include "input.h"
@@ -269,7 +269,7 @@ typedef struct
 #include "cdaudio.h"
 
 #ifdef GLQUAKE
-#include "glquake.h"
+#include "renderer/opengl/glquake.h"
 #endif
 
 //=============================================================================
