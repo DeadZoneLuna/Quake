@@ -72,10 +72,6 @@ add_sources(
 	snd_mixa.s
 	sound.h
 	spritegn.h
-	sv_main.cpp
-	sv_move.cpp
-	sv_phys.cpp
-	sv_user.cpp
 	sys.h
 	vid.h
 	view.cpp
@@ -93,6 +89,8 @@ add_sources(
 
 add_subdirectory( client )
 add_subdirectory( net )
+add_subdirectory( server )
+
 if( MSVC )
 	add_sources(
 		cd_win.cpp
