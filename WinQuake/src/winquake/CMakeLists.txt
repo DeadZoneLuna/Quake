@@ -24,11 +24,6 @@ add_sources(
 	bspfile.h
 	cdaudio.h
 	chase.cpp
-	cl_demo.cpp
-	cl_input.cpp
-	cl_main.cpp
-	cl_parse.cpp
-	cl_tent.cpp
 	client.h
 	cmd.cpp
 	cmd.h
@@ -96,6 +91,7 @@ add_sources(
 	renderer/d_ifacea.h
 )
 
+add_subdirectory( client )
 add_subdirectory( net )
 if( MSVC )
 	add_sources(
