@@ -14,7 +14,7 @@ preprocess_sources()
 add_executable( gas2masm ${PREP_SRCS} )
 
 #Create filters
-create_source_groups( ${CMAKE_SOURCE_DIR} )
+create_source_groups( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 clear_sources()
 

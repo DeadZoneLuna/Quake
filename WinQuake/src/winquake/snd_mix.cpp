@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "winquake.h"
 #else
 #define DWORD	unsigned long
+#define LPVOID void*
 #endif
 
 #define	PAINTBUFFER_SIZE	512
@@ -69,11 +70,11 @@ void S_TransferStereo16 (int endtime)
 {
 	int		lpos;
 	int		lpaintedtime;
-	DWORD	*pbuf;
+	LPVOID	pbuf;
 #ifdef _WIN32
 	int		reps;
 	DWORD	dwSize = 0,dwSize2;
-	DWORD	*pbuf2;
+	LPVOID	pbuf2;
 	HRESULT	hresult;
 #endif
 	
@@ -110,7 +111,7 @@ void S_TransferStereo16 (int endtime)
 	else
 #endif
 	{
-		pbuf = (DWORD *)shm->buffer;
+		pbuf = (LPVOID)shm->buffer;
 	}
 
 	while (lpaintedtime < endtime)
@@ -148,11 +149,11 @@ void S_TransferPaintBuffer(int endtime)
 	int 	step;
 	int		val;
 	int		snd_vol;
-	DWORD	*pbuf;
+	LPVOID	pbuf;
 #ifdef _WIN32
 	int		reps;
 	DWORD	dwSize = 0,dwSize2;
-	DWORD	*pbuf2;
+	LPVOID	pbuf2;
 	HRESULT	hresult;
 #endif
 
@@ -197,7 +198,7 @@ void S_TransferPaintBuffer(int endtime)
 	else
 #endif
 	{
-		pbuf = (DWORD *)shm->buffer;
+		pbuf = (LPVOID)shm->buffer;
 	}
 
 	if (shm->samplebits == 16)

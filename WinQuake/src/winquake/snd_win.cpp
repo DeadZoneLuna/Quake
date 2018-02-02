@@ -48,7 +48,8 @@ static int	snd_sent, snd_completed;
  */ 
 
 HANDLE		hData;
-HPSTR		lpData, lpData2;
+LPVOID		lpData;
+HPSTR		lpData2;
 
 HGLOBAL		hWaveHdr;
 LPWAVEHDR	lpWaveHdr;
@@ -521,7 +522,7 @@ qboolean SNDDMA_InitWav (void)
 	for (i=0 ; i<WAV_BUFFERS ; i++)
 	{
 		lpWaveHdr[i].dwBufferLength = WAV_BUFFER_SIZE; 
-		lpWaveHdr[i].lpData = lpData + i*WAV_BUFFER_SIZE;
+		lpWaveHdr[i].lpData = reinterpret_cast<char*>( lpData ) + i*WAV_BUFFER_SIZE;
 
 		if (waveOutPrepareHeader(hWaveOut, lpWaveHdr+i, sizeof(WAVEHDR)) !=
 				MMSYSERR_NOERROR)

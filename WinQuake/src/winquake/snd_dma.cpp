@@ -576,7 +576,7 @@ void S_ClearBuffer (void)
 	if (pDSBuf)
 	{
 		DWORD	dwSize;
-		DWORD	*pData;
+		LPVOID	pData;
 		int		reps;
 		HRESULT	hresult;
 
